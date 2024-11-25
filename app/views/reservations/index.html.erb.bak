@@ -1,0 +1,32 @@
+<h1>Reservations</h1>
+
+<%= link_to 'New Reservation', new_reservation_path, class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Reservation Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.name %></td>
+        <td><%= reservation.phone_number %></td>
+        <td><%= reservation.reservation_date.strftime("%B %d, %Y at %I:%M %p") %></td>
+        <td>
+          <%= link_to 'Show', reservation_path(reservation) %> |
+          <%= link_to 'Edit', edit_reservation_path(reservation) %> |
+          <%= link_to 'Delete', reservation_path(reservation), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @reservations.empty? %>
+  <p>No reservations found.</p>
+<% end %>
